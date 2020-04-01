@@ -56,3 +56,15 @@ input[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
 }
+a:link {
+  text-decoration: none;
+}
+a {
+  color: greenyellow;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}

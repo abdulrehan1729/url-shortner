@@ -13,7 +13,6 @@ export class urlComponent extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.copyCodeToClipboard = this.copyCodeToClipboard.bind(this);
   }
   handleChange(event) {
     console.log(event);
@@ -40,12 +39,7 @@ export class urlComponent extends Component {
         }
       });
   }
-  copyCodeToClipboard = () => {
-    const el = this.textArea;
-    el.select();
-    document.execCommand("copy");
-    this.setState({ copySuccess: true });
-  };
+
   render() {
     if (!this.state.isUrlShorten) {
       return (
@@ -70,19 +64,11 @@ export class urlComponent extends Component {
     } else {
       return (
         <div>
+          <h4>Please click on the below link to visit the website</h4>
           <div>
-            <textarea
-              ref={textarea => (this.textArea = textarea)}
-              value={this.state.shortUrl}
-            />
-          </div>
-          <div>
-            <button onClick={() => this.copyCodeToClipboard()}>
-              Copy to Clipboard
-            </button>
-            {this.state.copySuccess ? (
-              <div style={{ color: "green" }}>Success!</div>
-            ) : null}
+            <a ref={a => (this.textArea = a)} href={this.state.shortUrl}>
+              {this.state.shortUrl}
+            </a>
           </div>
         </div>
       );
