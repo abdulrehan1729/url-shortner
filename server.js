@@ -1,10 +1,13 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://localhost/url-shortner";
+const mongoURI = process.env.MONGODB_URI || "mongodb://localhost/url-shortner";
 const routes = require("./routers/router");
 const bodyParser = require("body-parser");
 const path = require("path");
-require("dotenv").config();
+const app = express();
+const port = process.env.PORT || 7800;
 
 const connectOptions = {
   keepAlive: true,
@@ -16,8 +19,6 @@ mongoose.connect(mongoURI, connectOptions, (err, db) => {
   if (err) console.log(`Error`, err);
   console.log(`Connected to MongoDB`);
 });
-const app = express();
-const port = process.env.PORT || 7800;
 
 require("./models/UrlShorten");
 app.use("/", express.static(path.join(__dirname, "/client/build")));
