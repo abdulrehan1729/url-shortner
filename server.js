@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 const connectOptions = {
   keepAlive: true,
-  reconnectTries: Number.MAX_VALUE
+  reconnectTries: Number.MAX_VALUE,
 };
 //Connect to MongoDB
 mongoose.Promise = global.Promise;
@@ -18,6 +18,8 @@ const app = express();
 const port = process.env.PORT || 7800;
 
 require("./models/UrlShorten");
+app.use("/", express.static(path.join(__dirname, "/client/build")));
+
 app.use(bodyParser.json());
 app.use("/", routes);
 
