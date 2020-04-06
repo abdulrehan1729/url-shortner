@@ -8,31 +8,30 @@ export class urlComponent extends Component {
       isUrlShorten: false,
       url: "",
       shortUrl: "",
-      copySuccess: false
+      copySuccess: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
-    console.log(event);
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   }
   handleSubmit(e) {
     e.preventDefault();
-    const shortBaseUrl = "http://localhost:7800";
+    const shortBaseUrl = "https://url-shortning-sys.herokuapp.com/";
     axios
       .post("/", {
         originalUrl: this.state.url,
-        shortBaseUrl: shortBaseUrl
+        shortBaseUrl: shortBaseUrl,
       })
-      .then(resp => {
+      .then((resp) => {
         if (!resp.error) {
           this.setState({
             shortUrl: resp.data.shortUrl,
-            isUrlShorten: true
+            isUrlShorten: true,
           });
         } else {
           console.log(resp.error);
@@ -66,7 +65,7 @@ export class urlComponent extends Component {
         <div>
           <h4>Please click on the below link to visit the website</h4>
           <div>
-            <a ref={a => (this.textArea = a)} href={this.state.shortUrl}>
+            <a ref={(a) => (this.textArea = a)} href={this.state.shortUrl}>
               {this.state.shortUrl}
             </a>
           </div>
