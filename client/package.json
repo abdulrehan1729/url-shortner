@@ -33,5 +33,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://url-shortning-sys.herokuapp.com/"
+  "proxy": "http://localhost:7800"
 }
