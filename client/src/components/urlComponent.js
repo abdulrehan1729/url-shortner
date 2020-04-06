@@ -21,7 +21,7 @@ export class urlComponent extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const shortBaseUrl = "https://url-shortning-sys.herokuapp.com";
+    const shortBaseUrl = "http://localhost:7800";
     axios
       .post("/", {
         originalUrl: this.state.url,
