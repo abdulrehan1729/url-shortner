@@ -4,6 +4,7 @@ const mongoURI = "mongodb://localhost/url-shortner";
 const routes = require("./routers/router");
 const bodyParser = require("body-parser");
 const path = require("path");
+require("dotenv").config();
 
 const connectOptions = {
   keepAlive: true,
