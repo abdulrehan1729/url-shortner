@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Loader from "./loader";
 
 export class urlComponent extends Component {
   constructor() {
@@ -9,6 +10,7 @@ export class urlComponent extends Component {
       url: "",
       shortUrl: "",
       copySuccess: false,
+      isLoading: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +23,8 @@ export class urlComponent extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const shortBaseUrl = "http://localhost:7800";
+    this.setState({ isLoading: true });
+    const shortBaseUrl = process.env.BASE_URL || "http://localhost:7800";
     axios
       .post("/", {
         originalUrl: this.state.url,
@@ -32,6 +35,7 @@ export class urlComponent extends Component {
           this.setState({
             shortUrl: resp.data.shortUrl,
             isUrlShorten: true,
+            isLoading: false,
           });
         } else {
           console.log(resp.error);
@@ -40,6 +44,9 @@ export class urlComponent extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return <Loader />;
+    }
     if (!this.state.isUrlShorten) {
       return (
         <div>
