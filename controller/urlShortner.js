@@ -1,6 +1,7 @@
 const validUrl = require("valid-url");
 const UrlShorten = require("../models/UrlShorten");
 const shortid = require("shortid");
+require("dotenv").config();
 
 const UrlShortenController = {
   async getShortenUrl(req, res) {
@@ -13,7 +14,8 @@ const UrlShortenController = {
     }
   },
   async createShortenUrl(req, res) {
-    const { originalUrl, shortBaseUrl } = req.body;
+    const { originalUrl } = req.body;
+    const shortBaseUrl = process.env.BASE_URL || "http://localhost:7800";
     if (validUrl.isUri(shortBaseUrl)) {
     } else {
       return res.status(401).json("Invalid Base Url");
@@ -31,7 +33,7 @@ const UrlShortenController = {
             originalUrl,
             shortUrl,
             urlCode,
-            updatedAt
+            updatedAt,
           });
           await item.save();
           res.status(200).json(item);
@@ -42,7 +44,7 @@ const UrlShortenController = {
     } else {
       return res.status(401).json("Invalid Original Url");
     }
-  }
+  },
 };
 
 module.exports = UrlShortenController;

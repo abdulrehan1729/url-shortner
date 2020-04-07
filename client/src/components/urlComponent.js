@@ -24,11 +24,10 @@ export class urlComponent extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ isLoading: true });
-    const shortBaseUrl = process.env.BASE_URL;
+
     axios
       .post("/", {
         originalUrl: this.state.url,
-        shortBaseUrl: shortBaseUrl,
       })
       .then((resp) => {
         if (!resp.error) {
